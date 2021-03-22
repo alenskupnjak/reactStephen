@@ -5,16 +5,12 @@
 /tmp
 /out-tsc
 /built
-/season
+
 
 
 # dependencies
 /node_modules
 
-
-
-
-# IDE - VSCode
 .vscode
 
 
