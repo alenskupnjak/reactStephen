@@ -3,14 +3,35 @@ import axios from 'axios';
 // const chalk = require('chalk');
 
 function Search() {
-  const [term, setTerm] = useState('programming');
+  const [term, setTerm] = useState('car');
+  const [debouncedTerm, setDebouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
 
-  console.log('Uvijek renderiram');
+  // // 2/3 riješenje IIF
+  // (async () => {
+  //   await axios.get('url');
+  // })();
 
-  // async se ne smije koristiti
+  // // 3/3 PROMISE
+  // axios.get('url').then((res) => {
+  //   console.log(res);
+  // });
+
+  // set debounce
   useEffect(() => {
-    // 1/3 riješenje
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term);
+    }, 1000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [term]);
+
+
+
+
+  // debounce
+  useEffect(() => {
     const search = async () => {
       const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
@@ -18,32 +39,22 @@ function Search() {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       });
-
       setResults(data.query.search);
-      console.log(results);
+      console.log(data.query.search);
     };
-    if (term) {
-      search();
-    }
 
-    // // 2/3 riješenje IIF
-    // (async () => {
-    //   await axios.get('url');
-    // })();
-
-    // // 3/3 PROMISE
-    // axios.get('url').then((res) => {
-    //   console.log(res);
-    // });
+    search();
 
     return () => {
-      console.log('useEffect return');
+      // cleanup;
     };
-  }, [term]);
+  }, [debouncedTerm]);
 
+
+  //  data for rendering
   const renderResults = results.map((data) => {
     // const regexSapnClass = /Dog/i;
     const regexSpanClass = /<span class="searchmatch">/gi;
@@ -72,6 +83,8 @@ function Search() {
     );
   });
 
+
+  // RENDER
   return (
     <div>
       <div className="ui form">
