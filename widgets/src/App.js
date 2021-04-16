@@ -40,13 +40,14 @@ function App() {
   const [selected, setSelected] = useState(options[0]);
   const [showDropdown, setShowDropdown] = useState(true);
 
-
   return (
     <React.Fragment>
       <Header></Header>
+
       <Route path="/">
         <Accordian items={items}></Accordian>
       </Route>
+
       <Route path="/list">
         <Search></Search>
       </Route>
@@ -68,6 +69,7 @@ function App() {
       <Route path="/translate">
         <Translate></Translate>
       </Route>
+      
     </React.Fragment>
   );
 }
