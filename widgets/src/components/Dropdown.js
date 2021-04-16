@@ -1,27 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-// useEffect(() => {
-//   const onBodyClick = (event) => {
-//     if (ref.current.contains(event.target)) {
-//       return;
-//     }
-//     setOpen(false);
-//   };
-//   document.body.addEventListener("click", onBodyClick, { capture: true });
-
-//   return () => {
-//     document.body.removeEventListener("click", onBodyClick, {
-//       capture: true,
-//     });
-//   };
-// }, []);
-
-const Dropdown = ({ selected, onSelectedChange, options,  label }) => {
+const Dropdown = ({ selected, onSelectedChange, options, label }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
   // Samo jednom se in icijalizira
-  useEffect(() => {     
+  useEffect(() => {
     //
     const onBodyClick = (event) => {
       if (ref.current.contains(event.target)) {

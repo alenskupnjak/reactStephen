@@ -47,7 +47,6 @@ function Search() {
     };
 
     search();
-
     return () => {
       // cleanup;
     };

@@ -3,6 +3,8 @@ import Accordian from './components/Accordian';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
+import Route from './components/Route';
+import Header from './components/Header';
 
 const items = [
   {
@@ -38,23 +40,34 @@ function App() {
   const [selected, setSelected] = useState(options[0]);
   const [showDropdown, setShowDropdown] = useState(true);
 
+
   return (
     <React.Fragment>
-      {/* <Accordian items={items}></Accordian> */}
-      {/* <Search></Search> */}
-      {/* <button onClick={() => setShowDropdown(!showDropdown)}>
-        Toggle Dropdown
-      </button>
-      {showDropdown ? (
-        <Dropdown
-          selected={selected}
-          onSelectedChange={setSelected}
-          options={options}
-        ></Dropdown>
-      ) : null} */}
-      <Translate></Translate>
+      <Header></Header>
+      <Route path="/">
+        <Accordian items={items}></Accordian>
+      </Route>
+      <Route path="/list">
+        <Search></Search>
+      </Route>
 
+      <Route path="/dropdown">
+        <button onClick={() => setShowDropdown(!showDropdown)}>
+          Toggle Dropdown
+        </button>
+        {showDropdown ? (
+          <Dropdown
+            label="Select a color"
+            selected={selected}
+            onSelectedChange={setSelected}
+            options={options}
+          ></Dropdown>
+        ) : null}
+      </Route>
 
+      <Route path="/translate">
+        <Translate></Translate>
+      </Route>
     </React.Fragment>
   );
 }

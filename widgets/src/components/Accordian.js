@@ -35,13 +35,7 @@ const Accordian = (props) => {
     );
   });
 
-
-  
-  return (
-    <div className="ui styled accordion">
-      {renderItems}
-    </div>
-  );
+  return <div className="ui styled accordion">{renderItems}</div>;
 };
 
 export default Accordian;
